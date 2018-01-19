@@ -1,0 +1,72 @@
+<center>
+<h3>View Invoices</h3>
+</center>
+<br/>
+<br/>
+
+
+
+<ul class="users">
+	<li>
+		<table width="90%">
+	<% if @invoice.count >= 1 %>
+         
+			
+            <tr>
+				<th>User ID</th>
+              <th>&nbsp;&nbsp;Date and Time</th>
+              <th>Description</th>
+              <th>Cost</th>
+            </tr>
+         <% @users.each do |users| %>
+		
+			<% total = 0.0 %>
+	  <% @invoice.each do |invoice| %>
+		  <% if users.id == invoice.user_id %>
+            <tr>
+				<td><%= invoice.user_id %></td>
+                <td>&nbsp;&nbsp;<%= invoice.created_at %></td> 
+                <td><%= invoice.comment %></td> 
+                <td><%= number_to_currency(invoice.cost, :unit => "$") %></td>
+			<% if admin_privilige? || manager_privilige? %>
+                
+                <td>|<%= link_to "delete", invoice, method: :delete,
+                                  data: { confirm: "You sure?" } %>|</td>
+				<% total = total + invoice.cost %>
+			<% end %>
+            </tr>
+			
+			<% end %>
+          <% end %>
+			
+			<% @bookings.each do |booking| %>
+				<% if booking.user.id == users.id %>
+	    			<% total = total + booking.room.room_type.cost %>
+					<tr>
+						<td><%= booking.user.id %></td>
+						<td>&nbsp;&nbsp;<%=  booking.updated_at %></td>
+						<td><%=  booking.room.room_type.name %></td>
+						<td><%= number_to_currency(booking.room.room_type.cost, :unit => "$") %></td>
+					</tr>
+					<tr>
+						<th></th>
+						<th>Total Invoice Costs:</th>
+					  	<th>Please Pay</th>
+					  	<th><%= number_to_currency(total, :unit => "$") %></th>
+					
+					</tr>
+					<tr>
+						<th colspan="3">&nbsp;</th>
+					</tr>
+	  			<% end %>
+		 	<% end %>
+			
+            
+              
+			
+		<% end %>
+		</table>
+	  <% end %>
+	
+	</li>
+</ul>

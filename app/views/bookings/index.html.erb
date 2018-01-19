@@ -1,0 +1,27 @@
+<center>
+<h3>Edit Bookings</h3>
+</center>
+<br/>
+<br/>
+
+
+
+<ul class="users">
+  <% @bookings.each do |booking| %>
+    <li>
+        
+        
+        <b>Guest: </b> 
+        <%=  booking.user.firstname + " " + booking.user.lastname %> 
+       <br/>
+        [<%=  booking.room.room_type.name %>]
+        <br/> <b>CheckIn &nbsp; &nbsp; &nbsp; CheckOut</b>
+        <br/><%=  booking.checkin %>  &nbsp; <%=  booking.checkout %>
+        
+        <br/> <%= link_to "delete", booking, method: :delete,
+                                  data: { confirm: "You sure?" } %> |
+        <%= link_to "update", "#" %>
+        
+    </li>
+  <% end %>
+</ul>

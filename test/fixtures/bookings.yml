@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  checkin: 2017-12-19
+  checkout: 2017-12-19
+  room: one
+
+two:
+  checkin: 2017-12-19
+  checkout: 2017-12-19
+  room: two

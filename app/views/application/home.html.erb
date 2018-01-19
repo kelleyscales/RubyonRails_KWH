@@ -1,0 +1,88 @@
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
+ @media (max-width: 600px) {
+    .carousel-caption {
+      display: none; 
+    }
+  }
+</style>
+
+
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active" id="pictureformat">
+       <%= image_tag "room.jpg" %> 
+        <div class="carousel-caption">
+          <h3>Rooms with a View</h3>
+          <p>Best price rooms with great views</p>
+        </div>   
+    </div>
+
+    <div class="item" id="pictureformat">
+        <%= image_tag("hotel.jpg") %> 
+        <div class="carousel-caption">
+          <h3>Historic Getaway</h3>
+          <p>Antique and quality experience</p>
+        </div>   
+    </div>
+
+       <div class="item" id="pictureformat">
+           <%= image_tag "food.jpg" %> 
+           <div class="carousel-caption">
+          <h3>Food and Beverages</h3>
+          <p>Great features available</p>
+        </div>   
+    </div>
+      
+  </div>
+
+  <!-- Left and right controls -->
+<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+<br/>
+
+    
+    <center>
+        <h2>Welcome to <br/> <b>King William Hotel</b></h2>
+        <h4 style="width:60%">King William Hotel will transport you to a less hurried time, all the way back to the 1920s to immerse you in a historic atmosphere. With our high class staff and prestigious services you will be thoroughly taken care of with the up most satisfaction guaranteed. We offer an antique surrounding in each room and we offer organic substitutes on our fresh menu to satisfy your everyday meal needs. Let us take you away, back in the day, for a great stay.</h4>
+      </center>
+  
+
+  <div class="container text-center">    
+  <br/>
+  <div class="row">
+    <div class="col-sm-4">
+      <p><%= link_to "About Us", about_path %></p>
+        <%= image_tag("sign.jpg", :class => "img-responsive", :style => "width:100%", :alt => "image" ) %>
+    </div>
+    <div class="col-sm-4"> 
+      <p><%= link_to "Rooms", rooms_path %></p>
+        <%= image_tag("bed.jpg", :class => "img-responsive", :style => "width:100%", :alt => "image" ) %>
+    </div>
+    <div class="col-sm-4">
+        <p><%= link_to "Features", features_path %></p>
+      <%= image_tag("snack.jpg", :class => "img-responsive", :style => "width:100%", :alt => "image" ) %>
+    </div>
+  </div>
+</div><br>
+

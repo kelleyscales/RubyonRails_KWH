@@ -1,0 +1,113 @@
+<% provide(:title, @user.firstname) %>
+<div class="row">
+   <div class="col-sm-6">
+   
+       
+        
+            
+            
+        <h3>
+           
+          <%= @user.firstname %> <%= @user.lastname %>
+         
+          </h3>
+        
+            
+       
+    <h5>
+          <%= @user.UserType.title %> Account
+    
+      </h5>
+       
+        <hr/>
+        <div class="profile">
+        <h5>
+            <%= image_tag("Icon.png", :class => "img-responsive", :style => "width:12%", :alt => "image" ) %> <br/>
+            <b>User ID: </b><%= @user.id %><br/><br/>
+            <b>First Name: </b><%= @user.firstname %><br/><br/>
+            <b>Last Name: </b><%= @user.lastname %><br/><br/>
+            <b>Email Address: </b><%= @user.email %><br/><br/>
+        </h5>
+            <% if logged_in?  %>
+              <% if admin_privilige? || manager_privilige? || current_user.id == @user.id %>
+              <%= link_to "update profile", edit_user_path(@user.id), class: "btn btn-sm btn-primary" %>
+              <% end %>
+            <% end %>
+        </div>
+        
+         
+</div>
+    
+    
+    <div class="col-sm-6">
+        
+        
+        
+    
+		<% total = 0 %>
+        <% if @invoice.count >= 1 || @bookings.count >= 1#Invoice appears on page only when user has invoices%>
+        <br/><br/><br/><br/><br/>
+        <h3>Invoice History</h3>
+         <p>___________________________________________________________</p>   
+          <table width="90%">
+            <tr>
+              <th>Date and Time</th>
+              <th>Description</th>
+              <th>Cost</th>
+              <% if admin_privilige? || manager_privilige?  %>
+            
+              <% end %>
+            </tr>
+          
+          <% @invoice.each do |invoice| %>
+            <tr>
+                <td><%= invoice.created_at %></td> 
+                <td>&nbsp;&nbsp;&nbsp;<%= invoice.comment %></td> 
+                <td><%= number_to_currency(invoice.cost, :unit => "$") %></td>
+                <% if admin_privilige? || manager_privilige? %>
+                
+                <td>&nbsp; |<%= link_to "delete", invoice, method: :delete,
+                                  data: { confirm: "You sure?" } %>|</td>
+				
+                <% end %>
+                <% total += invoice.cost %>
+            </tr>
+          <% end %>
+			
+			 <% @bookings.each do |booking| %>
+			  	<tr>
+			  
+			  		<td><%= booking.updated_at %></td>
+					<td>&nbsp;&nbsp;&nbsp;<%= booking.room.room_type.name %></td>
+					<td><%= number_to_currency(booking.room.room_type.cost, :unit => "$") %></td>
+                    
+			  	</tr>
+			  <% total += booking.room.room_type.cost %>
+			  <% end %>
+			  
+              <tr>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+                  <th>&nbsp;</th>
+              </tr>
+              
+              
+              
+              <tr>
+              
+			<th>Total Invoice Costs:</th>
+			  <th>Please Pay</th>
+			  <th><%= number_to_currency(total, :unit => "$") %></th>
+                   
+				  </tr>
+          
+          </table>
+ <p>___________________________________________________________</p> 
+ <% end %>
+</div>
+        
+        
+        
+   
+ 
+</div>

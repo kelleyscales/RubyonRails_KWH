@@ -1,0 +1,22 @@
+<%= form_for(@booking) do |f| %>
+    
+<%= render 'shared/booking_errors' %>
+      
+    <%= f.label :user_id, "User ID" %>
+    <%= f.text_field :user_id, class: 'form-control' %>
+    
+    <%= f.label :room_id, "Room ID" %>
+	
+	<%= f.text_field :room_id, class: 'form-control' %>
+    
+    <%= f.label :checkin, "Check In" %>
+    <%= f.date_field :checkin, class: 'form-control' %>
+
+    <%= f.label :checkout, "Check Out " %>
+    <%= f.date_field :checkout, class: 'form-control' %>
+ 
+    
+
+        <br/>
+      <%= f.submit "Submit Booking", class: "btn btn-primary" %>
+    <% end %>

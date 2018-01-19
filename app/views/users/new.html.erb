@@ -1,0 +1,54 @@
+
+<center>
+    <% if not logged_in? %>
+    <center>  
+<div class= "center jumbotron" style="width:100%">
+    <h3>Sign Up <br/>
+        <b>Create Memories</b></h3>
+  </div> 
+  </center>
+
+
+<div class="display2">
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render 'form' %>
+  </div>
+</div>
+</div>
+    
+    <% elsif logged_in? && current_user.UserType.id == 1 || current_user.UserType.id == 2 %>
+ <h3>Create Member</h3>
+
+    <div class="display2">
+    <div class="row">
+  <div class="col-sm-6">
+      <%= render 'adminform' %>
+  </div>
+        <div class="col-sm-6">
+        <br/><br/><br/><br/><br/>
+            <%= image_tag("staff.jpg", :class => "img-responsive", :style => "width:90%", :alt => "image" ) %>
+        </div>
+</div>
+    </div>
+    </center>
+
+<% elsif logged_in? && current_user.UserType.id == 3 %>
+<center>  
+<h3>Create Guest<br/>
+</center>
+<div class="display2">
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render 'form' %>
+  </div>
+</div>
+</div>
+
+
+<% else %>
+
+
+
+<% end %>
+

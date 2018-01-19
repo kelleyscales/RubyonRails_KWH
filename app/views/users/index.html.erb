@@ -1,0 +1,60 @@
+<div class="row">
+    <% if admin_privilige? || manager_privilige? %>
+    <div class="col-sm-6">
+<h3>Staff</h3>
+<%= link_to "Create a Member", signup_path, class: "btn btn-sm btn-primary" %>
+<br/>
+<br/>
+        
+        
+
+<ul class="users">
+  <% @staffusers.each do |user| %>
+    <li>
+       [<b><%= user.UserType.title %>:<%= user.id %></b>] 
+        
+        <%= link_to user.lastname + ", " + user.firstname, user %>
+        <% if admin_privilige? || manager_privilige? && !current_user?(user) %>
+        <br/> <%= link_to "delete user", user, method: :delete,
+                                  data: { confirm: "You sure?" } %> |
+        <%= link_to "update user", edit_user_path(user.id) %>
+        <% end %>
+    </li>
+  <% end %>
+</ul>
+
+</div>
+    <% else %>
+    
+    
+    <% end %>
+   
+    
+    
+<div class="col-sm-6">
+<h3>Guest</h3>
+<% if admin_privilige? || manager_privilige? || front_desk_privilige?  && !current_user?(@user) %>
+<%= link_to "Create a Guest", signup_path, class: "btn btn-sm btn-primary" %>
+<% end %>    
+<br/>
+
+<%= will_paginate %>
+<ul class="users">
+    <% @guestusers.each do |user| %>
+    <li>
+       [<b><%= user.UserType.title %>:<%= user.id %></b>] 
+        
+        <%= link_to user.lastname + ", " + user.firstname, user %>
+        <% if admin_privilige? || manager_privilige? || front_desk_privilige? && !current_user?(user) %>
+        <br/> <%= link_to "delete user", user, method: :delete,
+                                  data: { confirm: "You sure?" } %> |
+        <%= link_to "update user", edit_user_path(user.id) %>
+        
+        <% end %>
+        
+    </li>
+<% end %>
+</ul>
+<%= will_paginate %>
+</div>
+</div>
